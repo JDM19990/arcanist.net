@@ -1,0 +1,18 @@
+ document.getElementById("newsletterForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const email = this.email.value;
+
+    const response = await fetch("https://api.convertkit.com/v3/forms/8432421/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+        api_key: "013lvqA0t_sgbwY712IP0g",
+        email: email
+        })
+    });
+
+    const result = await response.json();
+    document.getElementById("formMessage").innerText = result.status === "success" 
+        ? "Thanks for subscribing!" 
+        : "Oops, something went wrong.";
+    });
